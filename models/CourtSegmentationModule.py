@@ -8,10 +8,10 @@ trained for volleyball court recognition and segmentation.
 import numpy as np
 from typing import List, Optional, Union
 
-from .YoloModule import YOLOModule
-from ..enums import DetectorModel
-from ..utils.logger import logger
-from ..core.data_structures import Detection
+from models.YoloModule import YOLOModule
+from enums import DetectorModel
+from utils.logger import logger
+from core.data_structures import Detection
 
 
 class CourtSegmentationModule:

@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Union, Dict, Any
 from dataclasses_json import dataclass_json
 import numpy as np
-from ..enums import DetectorModel
+from enums import DetectorModel
 
 
 @dataclass_json

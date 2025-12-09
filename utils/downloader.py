@@ -16,7 +16,7 @@ try:
 except ImportError:
     gdown = None
 
-from .logger import logger
+from utils.logger import logger
 
 
 # Google Drive file ID for the complete weights ZIP file

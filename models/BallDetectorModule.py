@@ -7,10 +7,10 @@ trained for volleyball ball recognition and segmentation.
 
 from typing import List, Optional, Union, Tuple
 import numpy as np
-from .YoloModule import YOLOModule
-from ..core.data_structures import Detection
-from ..enums import DetectorModel
-from ..utils.logger import logger
+from models.YoloModule import YOLOModule
+from core.data_structures import Detection
+from enums import DetectorModel
+from utils.logger import logger
 
 
 class BallDetectorModule:

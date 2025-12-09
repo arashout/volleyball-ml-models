@@ -15,8 +15,8 @@ from typing import List, Dict, Any, Optional, Tuple, Union
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
 
-from ..core.tracking_module import TrackedObject
-from ..core.data_structures import Detection
+from core.tracking_module import TrackedObject
+from core.data_structures import Detection
 
 
 @dataclass

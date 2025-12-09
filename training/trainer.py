@@ -11,8 +11,8 @@ from typing import Union, Optional, Dict, Any
 from transformers import TrainingArguments, Trainer
 from ultralytics import YOLO
 
-from ..settings import YOLOTrainingConfig, VideoMAETrainingConfig
-from .utils import (
+from settings import YOLOTrainingConfig, VideoMAETrainingConfig
+from training.utils import (
     create_videomae_datasets, create_videomae_model, create_videomae_collate_fn,
     compute_videomae_metrics, create_yolo_training_args, validate_dataset_path,
     save_training_results, get_optimal_batch_size

@@ -5,7 +5,7 @@ This package contains visualization utilities for displaying detection results,
 tracking information, and analytics data.
 """
 
-from .visualization_module import (
+from visualization.visualization_module import (
     VolleyballVisualizer, VisualizationConfig
 )
 

@@ -11,12 +11,12 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Union, Tuple
 
 # Import model classes
-from .core import GameStateResult, VolleyballTracker
-from .visualization import VolleyballVisualizer
-from .core.data_structures import PlayerKeyPoints, Detection
-from .settings import ModelWeightsConfig
-from .utils.logger import logger
-from .models import (
+from core import GameStateResult, VolleyballTracker
+from visualization import VolleyballVisualizer
+from core.data_structures import PlayerKeyPoints, Detection
+from settings import ModelWeightsConfig
+from utils.logger import logger
+from models import (
     ActionDetectorModule, BallDetectorModule, CourtSegmentationModule,
     PlayerDetectorModule, GameStatusClassifierModule
 )
@@ -236,7 +236,7 @@ class MLManager:
     def _init_tracking(self):
         """Initialize tracking module."""
         try:
-            from .core.tracking_module import TrackingConfig
+            from core.tracking_module import TrackingConfig
 
             # Initialize with default configuration
             self.tracker = VolleyballTracker(

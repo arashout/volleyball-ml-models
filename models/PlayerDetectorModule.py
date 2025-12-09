@@ -8,10 +8,10 @@ for volleyball player keypoint detection and analysis.
 from typing import List, Optional, Union, Dict, Any, Tuple
 import numpy as np
 import cv2
-from .YoloModule import YOLOModule
-from ..core.data_structures import PlayerKeyPoints, KeyPoint, BoundingBox, PoseDetection, Detection
-from ..enums import YOLOModelType, DetectorModel
-from ..utils.logger import logger
+from models.YoloModule import YOLOModule
+from core.data_structures import PlayerKeyPoints, KeyPoint, BoundingBox, PoseDetection, Detection
+from enums import YOLOModelType, DetectorModel
+from utils.logger import logger
 
 
 class PlayerDetectorModule:

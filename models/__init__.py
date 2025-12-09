@@ -10,12 +10,12 @@ This package contains specialized model classes for different ML tasks:
 - GameStatusClassifier: VideoMAE-based game state classification
 """
 
-from .YoloModule import YOLOModule
-from .ActionDetectorModule import ActionDetectorModule
-from .BallDetectorModule import BallDetectorModule
-from .CourtSegmentationModule import CourtSegmentationModule
-from .PlayerDetectorModule import PlayerDetectorModule
-from .GameStatusClassifierModule import GameStatusClassifierModule
+from models.YoloModule import YOLOModule
+from models.ActionDetectorModule import ActionDetectorModule
+from models.BallDetectorModule import BallDetectorModule
+from models.CourtSegmentationModule import CourtSegmentationModule
+from models.PlayerDetectorModule import PlayerDetectorModule
+from models.GameStatusClassifierModule import GameStatusClassifierModule
 
 __all__ = [
     "YOLOModule",

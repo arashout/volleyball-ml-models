@@ -2,8 +2,8 @@
 Utilities for ML Manager.
 """
 
-from .logger import logger
-from .downloader import (
+from utils.logger import logger
+from utils.downloader import (
     download_from_google_drive,
     download_all_models,
     check_model_weights,

@@ -12,12 +12,12 @@ from typing import List, Optional, Union, Tuple, Dict
 from supervision import BoxAnnotator, MaskAnnotator, VertexAnnotator
 from supervision.detection.core import Detections as SupervisionDetections
 
-from ..utils.logger import logger
-from ..core.data_structures import (
+from utils.logger import logger
+from core.data_structures import (
     Detection, SegmentationDetection, PoseDetection,
     BoundingBox, KeyPoint
 )
-from ..enums import YOLOModelType
+from enums import YOLOModelType
 
 
 class YOLOModule:

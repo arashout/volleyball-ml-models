@@ -11,8 +11,8 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from .training.trainer import UnifiedTrainer
-from .settings import YOLOTrainingConfig, VideoMAETrainingConfig
+from training.trainer import UnifiedTrainer
+from settings import YOLOTrainingConfig, VideoMAETrainingConfig
 
 
 def create_yolo_config_template(output_path: Path) -> None:

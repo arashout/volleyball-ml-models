@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+torch = "*"
+torchvision = "*"
+ultralytics = "*"
+transformers = "*"
+numpy = "*"
+opencv-python = "*"
+pillow = "*"
+pydantic = "*"
+pyyaml = "*"
+supervision = "*"
+dataclasses-json = "*"
+gdown = "*"
+pytorchvideo = {ref = "0f9a5e102e4d84972b829fd30e3c3f78c7c7fd1a", git = "https://github.com/facebookresearch/pytorchvideo"}
+volleyball-ml-manager = {file = ".", editable = true}
+norfair = "*"
+pydantic-settings = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
+python_full_version = "3.12.8"

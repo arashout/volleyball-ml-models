@@ -12,9 +12,9 @@ import cv2
 from transformers import VideoMAEImageProcessor, VideoMAEForVideoClassification
 import torch
 
-from ..enums import GameState
-from ..core.data_structures import GameStateResult
-from ..utils.logger import logger
+from enums import GameState
+from core.data_structures import GameStateResult
+from utils.logger import logger
 
 
 class GameStatusClassifierModule:

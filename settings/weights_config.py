@@ -81,7 +81,7 @@ class ModelWeightsConfig(BaseSettings):
         Returns:
             True if download was successful, False otherwise
         """
-        from ..utils.downloader import download_all_models
+        from utils.downloader import download_all_models
 
         return download_all_models(weights_dir=weights_dir, force_download=force)
 
@@ -96,6 +96,6 @@ class ModelWeightsConfig(BaseSettings):
         Returns:
             Dictionary mapping model names to availability status
         """
-        from ..utils.downloader import check_model_weights
+        from utils.downloader import check_model_weights
 
         return check_model_weights(weights_dir=weights_dir)

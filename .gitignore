@@ -144,7 +144,8 @@ Thumbs.db
 *.ckpt
 *.safetensors
 checkpoint/
-../../weights/
+weights/
+yolo*.pt
 
 # Temporary files
 *.tmp
@@ -160,3 +161,20 @@ logs/
 results/
 outputs/
 runs/
+output_*.mp4
+output_*.avi
+output_*.mov
+
+# Video processing outputs
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Utility scripts
+fix_imports.py
+
+# AI
+.claude
+
+test_clips/

@@ -7,7 +7,7 @@ parameters, with validation and default values.
 
 from typing import List, Optional, Union, Literal
 from pydantic import BaseModel, Field, validator
-from ..enums import YOLOModelType
+from enums import YOLOModelType
 
 
 class YOLOModelConfig(BaseModel):
