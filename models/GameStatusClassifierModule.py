@@ -9,7 +9,7 @@ import time
 from typing import List, Optional, Union, Dict, Any, Tuple
 import numpy as np
 import cv2
-from transformers import VideoMAEImageProcessor, VideoMAEForVideoClassification
+from transformers import VideoMAEImageProcessor, VideoMAEForVideoClassification, VideoMAEConfig
 import torch
 
 from enums import GameState
@@ -67,8 +67,10 @@ class GameStatusClassifierModule:
     def _load_model(self):
         """Load VideoMAE model and processor."""
         try:
+            config = VideoMAEConfig.from_pretrained(self.model_path)
+            config.num_labels = 3 
             self.processor = VideoMAEImageProcessor.from_pretrained(self.model_path)
-            self.model = VideoMAEForVideoClassification.from_pretrained(self.model_path, dtype=torch.float16)
+            self.model = VideoMAEForVideoClassification.from_pretrained(self.model_path, config=config, dtype=torch.float16)
             self.model.to(self.device)
             self.model.eval()
 
