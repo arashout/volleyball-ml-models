@@ -57,23 +57,30 @@ def compute_videomae_metrics(pred, class_labels: List[str]) -> Dict[str, float]:
     }
 
 
-def create_videomae_collate_fn():
-    """
-    Create collate function for VideoMAE training.
-    
-    Returns:
-        Collate function for data batching
-    """
-    def collate_fn(examples):
-        """The collation function to be used by `Trainer` to prepare data batches."""
-        # permute to (num_frames, num_channels, height, width)
+class VideoMAECollator:
+    """Collate function for VideoMAE training."""
+    def __call__(self, examples):
         pixel_values = torch.stack(
             [example["video"].permute(1, 0, 2, 3) for example in examples]
         )
         labels = torch.tensor([example["label"] for example in examples])
         return {"pixel_values": pixel_values, "labels": labels}
-    
-    return collate_fn
+
+
+def create_videomae_collate_fn():
+    """
+    Create collate function for VideoMAE training.
+
+    Returns:
+        Collate function for data batching
+    """
+    return VideoMAECollator()
+
+
+class ScaleToFloat:
+    """Convert pixel values from [0, 255] to [0, 1]."""
+    def __call__(self, x):
+        return x / 255.0
 
 
 def create_videomae_transforms(
@@ -83,19 +90,18 @@ def create_videomae_transforms(
 ) -> Tuple[Any, Any]:
     """
     Create training and validation transforms for VideoMAE.
-    
+
     Args:
         feature_extractor: VideoMAE image processor
         num_frames: Number of frames to sample
         resize_to: Target image size
-        
+
     Returns:
         Tuple of (train_transform, val_transform)
     """
     mean = feature_extractor.image_mean
     std = feature_extractor.image_std
 
-    # Training dataset transformations
     train_transform = Compose(
         [
             ApplyTransformToKey(
@@ -103,7 +109,7 @@ def create_videomae_transforms(
                 transform=Compose(
                     [
                         UniformTemporalSubsample(num_frames),
-                        Lambda(lambda x: x / 255.0),
+                        ScaleToFloat(),
                         Normalize(mean, std),
                         Resize(resize_to)
                     ]
@@ -112,7 +118,6 @@ def create_videomae_transforms(
         ]
     )
 
-    # Validation and evaluation datasets' transformations
     val_transform = Compose(
         [
             ApplyTransformToKey(
@@ -120,7 +125,7 @@ def create_videomae_transforms(
                 transform=Compose(
                     [
                         UniformTemporalSubsample(num_frames),
-                        Lambda(lambda x: x / 255.0),
+                        ScaleToFloat(),
                         Normalize(mean, std),
                         Resize(resize_to),
                     ]
@@ -128,7 +133,7 @@ def create_videomae_transforms(
             ),
         ]
     )
-    
+
     return train_transform, val_transform
 
 

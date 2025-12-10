@@ -161,10 +161,10 @@ class UnifiedTrainer:
             train_dataset, val_dataset, class_labels, label2id, id2label = create_videomae_datasets(
                 config.dataset.data_dir,
                 config.model.num_frames,
-                sample_rate=16,  # Default sample rate
+                sample_rate=16,
                 fps=30
             )
-            
+
             # Create model and processor
             self.logger.info("Creating VideoMAE model...")
             model, processor = create_videomae_model(
@@ -172,11 +172,18 @@ class UnifiedTrainer:
                 label2id,
                 id2label
             )
-            
+
+            # Calculate max_steps since dataset doesn't implement __len__
+            estimated_samples = len(list(Path(config.dataset.data_dir).glob("train/*/*.mp4")))
+            steps_per_epoch = estimated_samples // config.training.batch_size
+            max_steps = steps_per_epoch * config.training.num_epochs
+            self.logger.info(f"Estimated {estimated_samples} training samples, {steps_per_epoch} steps per epoch")
+            self.logger.info(f"Setting max_steps to {max_steps} for {config.training.num_epochs} epochs")
+
             # Create training arguments
             training_args = TrainingArguments(
                 output_dir=config.output.output_dir,
-                num_train_epochs=config.training.num_epochs,
+                max_steps=max_steps,
                 per_device_train_batch_size=config.training.batch_size,
                 per_device_eval_batch_size=config.training.batch_size,
                 learning_rate=config.training.learning_rate,
@@ -359,18 +366,19 @@ class UnifiedTrainer:
             if batch_size is None:
                 batch_size = get_optimal_batch_size(model_size, task, device)
             
-            # Create minimal config
+            from settings.yolo_config import YOLODatasetConfig, YOLOModelConfig, YOLOHardwareConfig
+
             config = YOLOTrainingConfig(
-                dataset=YOLOTrainingConfig.__fields__['dataset'].type(
+                dataset=YOLODatasetConfig(
                     data=data_yaml
                 ),
-                model=YOLOTrainingConfig.__fields__['model'].type(
+                model=YOLOModelConfig(
                     size=model_size,
                     type=task,
                     epochs=epochs,
                     batch=batch_size
                 ),
-                hardware=YOLOTrainingConfig.__fields__['hardware'].type(
+                hardware=YOLOHardwareConfig(
                     device=device
                 )
             )
@@ -403,19 +411,20 @@ class UnifiedTrainer:
         try:
             self.logger.info(f"Starting quick VideoMAE training: {num_classes} classes")
             
-            # Create minimal config
+            from settings.videomae_config import VideoMAEDatasetConfig, VideoMAEModelConfig, VideoMAETrainingParams, VideoMAEHardwareConfig
+
             config = VideoMAETrainingConfig(
-                dataset=VideoMAETrainingConfig.__fields__['dataset'].type(
+                dataset=VideoMAEDatasetConfig(
                     data_dir=data_dir
                 ),
-                model=VideoMAETrainingConfig.__fields__['model'].type(
+                model=VideoMAEModelConfig(
                     num_classes=num_classes
                 ),
-                training=VideoMAETrainingConfig.__fields__['training'].type(
+                training=VideoMAETrainingParams(
                     num_epochs=epochs,
                     batch_size=batch_size
                 ),
-                hardware=VideoMAETrainingConfig.__fields__['hardware'].type(
+                hardware=VideoMAEHardwareConfig(
                     device=device
                 )
             )

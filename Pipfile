@@ -20,6 +20,12 @@ pytorchvideo = {ref = "0f9a5e102e4d84972b829fd30e3c3f78c7c7fd1a", git = "https:/
 volleyball-ml-manager = {file = ".", editable = true}
 norfair = "*"
 pydantic-settings = "*"
+accelerate = ">=0.26.0"
+tensorboard = "*"
+scikit-learn = "*"
+matplotlib = "*"
+seaborn = "*"
+pandas = "*"
 
 [dev-packages]
 

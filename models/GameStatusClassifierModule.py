@@ -68,9 +68,14 @@ class GameStatusClassifierModule:
         """Load VideoMAE model and processor."""
         try:
             config = VideoMAEConfig.from_pretrained(self.model_path)
-            config.num_labels = 3 
+            config.num_labels = 3
             self.processor = VideoMAEImageProcessor.from_pretrained(self.model_path)
-            self.model = VideoMAEForVideoClassification.from_pretrained(self.model_path, config=config, dtype=torch.float16)
+            self.model = VideoMAEForVideoClassification.from_pretrained(
+                self.model_path,
+                config=config,
+                dtype=torch.float16,
+                ignore_mismatched_sizes=True
+            )
             self.model.to(self.device)
             self.model.eval()
 
